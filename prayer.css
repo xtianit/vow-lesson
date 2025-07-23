@@ -1,0 +1,147 @@
+.prayer-section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3498db;
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #e74c3c;
+}
+
+.prayer-points {
+    counter-reset: prayer-counter;
+}
+
+.prayer-item {
+    counter-increment: prayer-counter;
+    background: #f8f9fa;
+    margin-bottom: 20px;
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 5px solid #3498db;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.prayer-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-left-color: #e74c3c;
+}
+
+.prayer-item::before {
+    content: counter(prayer-counter);
+    position: absolute;
+    left: -15px;
+    top: 20px;
+    background: #3498db;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.prayer-item:hover::before {
+    background: #e74c3c;
+    transform: scale(1.1);
+}
+
+.prayer-text {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-left: 20px;
+}
+
+.scripture-ref {
+    color: #7f8c8d;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 8px;
+    margin-left: 20px;
+}
+
+.closing-section {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.closing-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.closing-section p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        border-radius: 15px;
+    }
+
+    .header {
+        padding: 30px 20px;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .content {
+        padding: 30px 20px;
+    }
+
+    .prayer-item {
+        padding: 20px;
+    }
+
+    .prayer-text {
+        margin-left: 15px;
+    }
+
+    .scripture-ref {
+        margin-left: 15px;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

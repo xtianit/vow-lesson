@@ -1,0 +1,2461 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>A Vow the Lord and its Implications</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="quiz.css" />
+
+        <style>
+            /* Professional Engaging Spinner */
+            .tab-spinner {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 150px;
+                width: 100%;
+                position: relative;
+            }
+
+            /* Hide the original Font Awesome icon */
+            .tab-spinner i {
+                display: none;
+            }
+
+            /* Main spinner ring */
+            .tab-spinner::before {
+                content: "";
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                border: 3px solid rgba(74, 109, 167, 0.1);
+                border-top: 3px solid #4a6da7;
+                border-right: 3px solid #4a6da7;
+                box-shadow: 0 0 15px rgba(74, 109, 167, 0.1);
+                animation: spinClockwise 1.2s
+                    cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+            }
+
+            .highlight {
+                color: #4a6da7;
+                font-weight: bold;
+                text-decoration: underline;
+            }
+
+            /* Inner spinner ring */
+            .tab-spinner::after {
+                content: "";
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 3px solid rgba(74, 109, 167, 0.05);
+                border-bottom: 3px solid #4a6da7;
+                border-left: 3px solid #4a6da7;
+                animation: spinCounterClockwise 1.8s
+                    cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+            }
+
+            /* Create the pulse effect */
+            @keyframes spinClockwise {
+                0% {
+                    transform: rotate(0deg) scale(1);
+                }
+                50% {
+                    transform: rotate(180deg) scale(1.1);
+                    border-top-color: #5b7fbf;
+                    border-right-color: #5b7fbf;
+                    box-shadow: 0 0 20px rgba(74, 109, 167, 0.4);
+                }
+                100% {
+                    transform: rotate(360deg) scale(1);
+                }
+            }
+
+            @keyframes spinCounterClockwise {
+                0% {
+                    transform: rotate(0deg) scale(1);
+                }
+                50% {
+                    transform: rotate(-180deg) scale(1.15);
+                    border-bottom-color: #5b7fbf;
+                    border-left-color: #5b7fbf;
+                }
+                100% {
+                    transform: rotate(-360deg) scale(1);
+                }
+            }
+
+            /* Add a subtle pulsating dot in the center */
+            .tab-spinner .center-dot {
+                position: absolute;
+                width: 12px;
+                height: 12px;
+                background-color: #4a6da7;
+                border-radius: 50%;
+                animation: pulseDot 1.5s ease-in-out infinite;
+            }
+
+            @keyframes pulseDot {
+                0%,
+                100% {
+                    transform: scale(0.7);
+                    opacity: 0.5;
+                }
+                50% {
+                    transform: scale(1);
+                    opacity: 0.8;
+                    box-shadow: 0 0 10px rgba(74, 109, 167, 0.6);
+                }
+            }
+
+            /* Keep your existing fade transition */
+            .tab-content {
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+            }
+
+            .tab-content.active {
+                opacity: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Loading Screen -->
+        <div class="loader-container">
+            <div class="loader-logo">
+                <img src="./logo.png" alt="Sunday School Logo" />
+                <div class="pulse"></div>
+            </div>
+            <div class="ministry-name">Life Gate Ministries Worldwide</div>
+            <div class="loader-text">Loading Sunday School Lesson</div>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="inner-logo-container">
+            <img src="./logo.png" alt="Sunday School Logo" class="logo" />
+        </div>
+
+        <button
+            class="theme-toggle"
+            onclick="toggleTheme()"
+            aria-label="Toggle theme"
+            style="z-index: 99999"
+        >
+            <i class="fas fa-moon"></i>
+        </button>
+
+        <div class="container">
+            <h1><b>SUNDAY SCHOOL LESSON</b></h1>
+            <h2>
+                <b>DATE: <span>JULY 27, 2025</span></b>
+            </h2>
+            <h2>
+                <b> A VOW TO THE LORD AND ITS IMPLICATIONS </b>
+            </h2>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="lessonProgress"></div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('intro')">
+                    Introduction
+                </button>
+                <button class="tab-btn" onclick="openTab('lesson')">
+                    Lesson
+                </button>
+
+                <button class="tab-btn" onclick="openTab('conclusion')">
+                    Conclusion
+                </button>
+                <button class="tab-btn" onclick="openTab('application')">
+                    Application
+                </button>
+
+                <button class="tab-btn" onclick="openTab('quiz')">Quiz</button>
+                <button class="tab-btn" onclick="openTab('prayer')">
+                    Prayer Points
+                </button>
+                <button class="tab-btn" onclick="openTab('assignment')">
+                    Assignment
+                </button>
+            </div>
+
+            <div id="tab-spinner" class="tab-spinner" style="display: none">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+
+            <!-- Tab Contents -->
+            <div id="intro" class="tab-content active">
+                <div class="memory-verse">
+                    <h1><b>🧠📝 Memory Verse</b></h1>
+                    <blockquote>
+                        <b>
+                            When thou shalt vow a vow unto the Lord thy God,
+                            thou shalt not slack to pay it: for the Lord thy God
+                            will surely require it of thee; and it would be sin
+                            in thee." — Deuteronomy 23:21
+                        </b>
+                        <br />
+                        <button
+                            onclick="showBibleVersions('Deuteronomy 23:21')"
+                            class="verse-btn btn-sm"
+                        >
+                            📖 Read Other Versions
+                        </button>
+                    </blockquote>
+                </div>
+                <h2><b>Text: Ecclesiastes 5:1–6 📚</b></h2>
+                <blockquote>
+                    <button
+                        onclick="showBibleVersions('Ecclesiastes 5:1-6')"
+                        class="verse-btn btn-sm"
+                    >
+                        📖 Read Ecclesiastes 5:1-6
+                    </button>
+                </blockquote>
+
+                <h2><b>INTRODUCTION</b> 🧠✨📖</h2>
+                <p>
+                    A vow is a solemn promise made audible or by the heart in
+                    return for help requested from God in times of need. It is a
+                    very effective mode of communicating and receiving from God
+                    as revealed in the Holy scriptures. Consequetly, men have
+                    often employed this strategy without cionsidering the
+                    implications and have incurred God's wrath.
+                </p>
+
+                <div class="aims-objectives">
+                    <h3><b>AIMS AND OBJECTIVES</b> 🎯📖💡</h3>
+                    <p>
+                        <strong>AIMS:</strong> To show the role of vow in our
+                        relationship with God and its attendant implications.
+                        ⚠️🕊️📖💰🤔
+                    </p>
+
+                    <p>
+                        <strong>OBJECTIVES:</strong> That people be sincere to
+                        God even as He sincerely attended or would attend to
+                        them. 🕊️⚖️📖💰🤔
+                    </p>
+                </div>
+            </div>
+
+            <div id="lesson" class="tab-content">
+                <h2><b>Text Review/Lesson 📚✨</b></h2>
+                <div class="main-text">
+                    <h3><b>Text: Ecclesiastes 5:1–6 📖</b></h3>
+                    <blockquote>
+                        <button
+                            onclick="showBibleVersions('Ecclesiastes 5:1-6')"
+                            class="verse-btn btn-sm"
+                        >
+                            📖 Read Ecclesiastes 5:1–6
+                        </button>
+                    </blockquote>
+                </div>
+
+                <div class="lesson-section">
+                    <h3><b>Lesson 🧠💡</b></h3>
+                    <p>
+                        <span>🌱🌷🌼🌿🌻🌺🍀🌳🌴🪴🏡🐝🐞</span> <br />
+
+                        The Holy Spirit is emphasizing on the text that we
+                        should be careful in our relationship with God not to
+                        incur His anger but to enjoy His Lordship. Let us
+                        cinsider the following lessons. ⚠️😔
+                    </p>
+                    <ol>
+                        <li>
+                            <h2>
+                                <u
+                                    ><b
+                                        >CONSIDER GOD'S SUPREMACY - Ecclesiastes
+                                        5:1–2 ⛪👥</b
+                                    ></u
+                                >
+                            </h2>
+                            <p>
+                                This is the area of concern, that is, your
+                                knowledge about whom you are dealing with not to
+                                fail Him, as if thought you can deceive Him or
+                                He is a fool.🕵️‍♂️🎭👹
+                            </p>
+                            <button
+                                onclick="showBibleVersions('Ecclesiastes 5:1-2')"
+                                class="verse-btn btn-sm"
+                            >
+                                Ecclesiastes 5:1–2
+                            </button>
+                        </li>
+
+                        <li>
+                            <h2>
+                                <b
+                                    ><u
+                                        >HE TAKES YOUR BY YOUR WORDS:
+                                        Ecclesiastes 5:2 💔🆚💖</u
+                                    ></b
+                                >
+                            </h2>
+                            <p>
+                                That is why He is warning us not to be quick in making vows.
+                            </p>
+                            <button
+                                onclick="showBibleVersions('Ecclesiastes 5:2')"
+                                class="verse-btn btn-sm"
+                            >
+                                Ecclesiastes 5:2
+                        </li>
+                        <li>
+                            <h2>
+                                <b><u>WHEN VOWS ARE NECESSARY 🌀🔥</u></b>
+                            </h2>
+                            <p>
+                                <ol title="a">
+                                    <li>When you are in need or in a situation. - Genesis 28:20-22, Judges 11:30-31</li>
+                                      <button
+                                            onclick="showBibleVersions('Genesis 28:20-22')"
+                                            class="verse-btn btn-sm"
+                                        >
+                                            Genesis 28:20-22
+                                        </button>
+                                        <button
+                                            onclick="showBibleVersions('Judges 11:30-31')"
+                                            class="verse-btn btn-sm"
+                                        >
+                                            Judges 11:30-31
+                                        </button>
+                                    <li>when your offering is not momentarily available - Psalm 26:1</li>
+                                    <button
+                                        onclick="showBibleVersions('Psalm 26:1')"
+                                        class="verse-btn btn-sm"
+                                    >
+                                        Psalm 26:1
+                                    </button>
+                                </ol>
+                            </p>
+
+                          
+                          
+                        </li>
+                        <li>
+                            <h2>
+                                <u
+                                    ><b
+                                        >HOW EFFECTIVE ARE VOWS? ⛪👥</b
+                                    ></u
+                                >
+                            </h2>
+                            <p>
+                               Jacob triumph through it - Genesis 31:13; Jephthah also enjoyed the benefits of vow - Judges 11:32-33
+                            </p>
+                            <button
+                                onclick="showBibleVersions('Judges 11:32-33')"
+                                class="verse-btn btn-sm"
+                            >
+                                Judges 11:32-33
+                            </button>
+                            <button
+                                onclick="showBibleVersions('Genesis 31:13')"
+                                class="verse-btn btn-sm"
+                            >
+                                Genesis 31:13
+                            </button>
+
+                        </li>
+                        <li>
+                            <h2>
+                                <u
+                                    ><b
+                                        >WHAT GOD REQUIRES: </b
+                                    ></u
+                                >
+                            </h2>
+                            <p>
+                              Is that you pay your vows without excuse and delay - Ecclesiastes 5:4-6,
+                                        Deuteronomy 23:21-23, Numbers 30:2
+                            </p>
+                            <button
+                                onclick="showBibleVersions('Ecclesiastes 5:4-6')"
+                                class="verse-btn btn-sm"
+                            >
+                                Ecclesiastes 5:4-6
+                            </button>
+                            <button
+                                onclick="showBibleVersions('Deuteronomy 23:21-23')"
+                                class="verse-btn btn-sm"
+                            >
+                                Deuteronomy 23:21-23
+                            </button>
+                            <button
+                                onclick="showBibleVersions('Numbers 30:2')"
+                                class="verse-btn btn-sm"
+                            >
+                                Numbers 30:2
+                            </button>
+                        </li>
+                        <li>
+                            <h2>
+                                <u
+                                    ><b
+                                        >WHEN IS THE VOW REQUIRED?: </b
+                                    ></u
+                                >
+                            </h2>
+                            <p>
+                              As soon as God fulfils His sode of the deal or as you declared.
+                            </p>
+                           
+                        </li>
+
+                           <li>
+                            <h2>
+                                <u
+                                    ><b
+                                        >PENALTY FOR NEGECTING PAYMENT OF VOW: </b
+                                    ></u
+                                >
+                            </h2>
+                            <p>
+                              God wil not take it lightly with anyone who uses Him and refused to appreciate Him. See Ecclesiastes 5:6, Psalm 50:7, Psalm 50:14-15. 
+                              God neglected Israel until they will pay their vows.
+                            </p>
+                            <button
+                                onclick="showBibleVersions('Ecclesiastes 5:6')"
+                                class="verse-btn btn-sm"
+                            >
+                                Ecclesiastes 5:6
+                            </button>
+                            <button
+                                onclick="showBibleVersions('Psalm 50:7')"
+                                class="verse-btn btn-sm"
+                            >
+                                Psalm 50:7
+                            </button>
+                            <button
+                                onclick="showBibleVersions('Psalm 50:14-15')"
+                                class="verse-btn btn-sm"
+                            >
+                                Psalm 50:14-15
+                            </button>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="conclusion" class="tab-content">
+                <h2>Conclusion 📜</h2>
+                <p>
+                   God has no problem with those who vow but is against those who vows and would not redeem the vows. Let us be careful
+                   to vow and when we vow either verbally of in our heart, we should make haste to redeem it.
+                </p>
+            </div>
+
+            
+
+
+        <div id="application" class="tab-content">
+            <h2>Personal Application 🧠🙏</h2>
+            <div class="reflection-section">
+                <div class="interactive-cards">
+                    <!-- Understanding Check -->
+                    <div class="reflection-card">
+                        <h3>
+                            Understanding the Importance of Vows to God 🎯🗣️
+                        </h3>
+                        <div class="love-meter">
+                            <p>
+                                On a scale of 1 to 10, how seriously do you now take the idea of making and fulfilling vows to God?
+                            </p>
+                            <div class="rating-container">
+                                <input
+                                    type="range"
+                                    min="1"
+                                    max="10"
+                                    value="5"
+                                    class="love-slider"
+                                    id="vowUnderstandingRating"
+                                />
+                                <span class="rating-value">5/10</span>
+                            </div>
+                            <div class="rating-feedback"></div>
+                        </div>
+                    </div>
+
+                    <!-- Action Plan -->
+                    <div class="reflection-card">
+                        <h3>
+                            Action Plan to Honor Your Vows 📝🙏
+                        </h3>
+                        <div class="action-items">
+                            <div class="action-item">
+                                <input type="checkbox" id="action1" />
+                                <label for="action1">
+                                    Think carefully and prayerfully before making any vow to God 🤔
+                                </label>
+                            </div>
+                            <div class="action-item">
+                                <input type="checkbox" id="action2" />
+                                <label for="action2">
+                                    Write down any vow you make and set a reminder to fulfill it 📅✍️
+                                </label>
+                            </div>
+                            <div class="action-item">
+                                <input type="checkbox" id="action3" />
+                                <label for="action3">
+                                    Share your vow with a trusted accountability partner for support 🤝
+                                </label>
+                            </div>
+                            <div class="action-item">
+                                <input type="checkbox" id="action4" />
+                                <label for="action4">
+                                    Always be sincere with God—He sees your heart 💖👁️
+                                </label>
+                            </div>
+                            <button class="add-action-btn">
+                                Add Personal Action
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reflection Journal -->
+                <div class="reflection-journal">
+                    <h3>Reflection Journal ✍️📖</h3>
+                    <div class="journal-prompts">
+                        <div class="prompt active">
+                            <p>
+                                What did you learn about the seriousness of making a vow before God?
+                            </p>
+                            <textarea
+                                class="reflection-input"
+                                placeholder="Write your thoughts here..."
+                            ></textarea>
+                        </div>
+                        <div class="prompt">
+                            <p>
+                                Have you ever made a promise to God and failed to fulfill it? How did that affect your relationship with Him?
+                            </p>
+                            <textarea
+                                class="reflection-input"
+                                placeholder="Reflect on your experience and lessons learned..."
+                            ></textarea>
+                        </div>
+                        <div class="prompt">
+                            <p>
+                                What step will you take this week to be more faithful and sincere in your dealings with God?
+                            </p>
+                            <textarea
+                                class="reflection-input"
+                                placeholder="Be specific about your plan of obedience..."
+                            ></textarea>
+                        </div>
+                        <div class="prompt-nav">
+                            <button class="prev-prompt" disabled>
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                            <span class="prompt-counter">1/3</span>
+                            <button class="next-prompt">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commitment Section -->
+                <div class="commitment-section">
+                    <h3>Personal Commitment 📜🖊️</h3>
+                    <div class="commitment-form">
+                        <p>Based on today’s lesson, I commit to:</p>
+                        <input
+                            type="text"
+                            class="commitment-input"
+                            placeholder="e.g., Fulfilling every vow I make to God without delay..."
+                        />
+                        <button class="save-commitment">
+                            Make Commitment
+                        </button>
+                    </div>
+                    <div class="saved-commitments">
+                        <h4>My Commitments to Sincere Vow-Keeping 📂💬</h4>
+                        <ul class="commitment-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <link rel="stylesheet" href="theme.css" />
+            <div id="quiz" class="tab-content">
+                <div class="quiz-container">
+                    <h3>Speed Quiz Challenge 🎯</h3>
+                    <div class="speed-quiz-container">
+                        <div class="quiz-stats">
+                            <div class="timer">
+                                ⏱️ Time: <span id="timer">50</span>s
+                            </div>
+                            <div class="score">
+                                Score: <span id="speed-score">0</span>
+                            </div>
+                        </div>
+                        <div id="question-container" class="question-display">
+                            <h4 style="color: green">Get Ready!</h4>
+                            <p style="color: green">
+                                Answer quickly for bonus points!
+                            </p>
+                        </div>
+
+                        <div class="answer-buttons">
+                            <button class="speed-btn" onclick="checkAnswer(0)">
+                                A
+                            </button>
+                            <button class="speed-btn" onclick="checkAnswer(1)">
+                                B
+                            </button>
+                            <button class="speed-btn" onclick="checkAnswer(2)">
+                                C
+                            </button>
+                            <button class="speed-btn" onclick="checkAnswer(3)">
+                                D
+                            </button>
+                        </div>
+
+                        <div class="controls">
+                            <button
+                                onclick="startSpeedQuiz()"
+                                class="start-btn"
+                            >
+                                Start Quiz
+                            </button>
+                            <button
+                                onclick="resetSpeedQuiz()"
+                                class="reset-btn"
+                            >
+                                Reset
+                            </button>
+                        </div>
+
+                        <div id="feedback" class="feedback"></div>
+                    </div>
+                </div>
+
+                <style>
+                    .quiz-container {
+                        padding: 15px;
+                        max-width: 100%;
+                    }
+
+                    .quiz-stats {
+                        display: flex;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                        gap: 10px;
+                        margin-bottom: 15px;
+                        font-size: 16px;
+                    }
+
+                    .question-display {
+                        margin: 15px 0;
+                        padding: 10px;
+                        border-radius: 8px;
+                        background: #f5f5f5;
+                        word-wrap: break-word;
+                    }
+
+                    .answer-buttons {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 10px;
+                        margin: 15px 0;
+                    }
+
+                    .speed-btn {
+                        padding: 12px;
+                        font-size: 16px;
+                        border-radius: 8px;
+                        border: 2px solid #4a6da7;
+                        /* background: white; */
+                        min-height: 44px;
+                        touch-action: manipulation;
+                    }
+
+                    .controls {
+                        display: flex;
+                        gap: 10px;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                    }
+
+                    .start-btn,
+                    .reset-btn {
+                        padding: 12px 24px;
+                        font-size: 16px;
+                        border-radius: 8px;
+                        min-width: 120px;
+                        touch-action: manipulation;
+                    }
+
+                    .badge {
+                        padding: 8px 16px;
+                        margin: 10px 0;
+                        width: 100%;
+                        text-align: center;
+                        font-size: 14px;
+                    }
+
+                    .performance-chart-container {
+                        width: 100%;
+                        max-width: 100%;
+                        overflow-x: auto;
+                        margin-top: 15px;
+                    }
+
+                    @media (max-width: 480px) {
+                        .quiz-stats {
+                            font-size: 14px;
+                        }
+
+                        .speed-btn {
+                            padding: 10px;
+                            font-size: 14px;
+                        }
+
+                        .start-btn,
+                        .reset-btn {
+                            padding: 10px 20px;
+                            font-size: 14px;
+                            min-width: 100px;
+                        }
+                    }
+                </style>
+
+                <!-- Rest of your quiz JavaScript code remains the same -->
+                <script>
+                    // ... (keep all existing code until endQuiz function) ...
+                    
+
+
+                    const speedQuestions = [
+                        {
+                            q: "According to Ecclesiastes 5:4, what should you do if you make a vow to God?",
+                            a: [
+                                "Forget it immediately",
+                                "Delay it as long as possible",
+                                "Pay it without delay",
+                                "Ask someone else to fulfill it",
+                            ],
+                            correct: 2, // C
+                            match: 2,
+                        },
+                        {
+                            q: "What does Deuteronomy 23:21 say about delaying a vow?",
+                            a: [
+                                "It is not a big deal",
+                                "God understands delays",
+                                "It is a sin to delay paying",
+                                "You can skip it altogether",
+                            ],
+                            correct: 2, // C
+                            match: 2,
+                        },
+                        {
+                            q: "Who in the Bible made a vow to God during a time of distress?",
+                            a: [
+                                "Noah",
+                                "Jacob",
+                                "Paul",
+                                "Moses",
+                            ],
+                            correct: 1, // B (Genesis 28:20–22)
+                            match: 1,
+                        },
+                        {
+                            q: "What did Jephthah do after God gave him victory?",
+                            a: [
+                                "Ran away",
+                                "Offered thanks",
+                                "Fulfilled his vow",
+                                "Built a house",
+                            ],
+                            correct: 2, // C (Judges 11:32-33)
+                            match: 2,
+                        },
+                        {
+                            q: "What happens when someone makes a vow and doesn’t keep it?",
+                            a: [
+                                "They are blessed anyway",
+                                "God overlooks it",
+                                "It is considered sin",
+                                "Angels remind them later",
+                            ],
+                            correct: 2, // C
+                            match: 2,
+                        },
+                        {
+                            q: "What is God's expectation when we make a vow?",
+                            a: [
+                                "Cancel it later",
+                                "Pay it promptly and sincerely",
+                                "Let the priest pay it",
+                                "Forget about it",
+                            ],
+                            correct: 1, // B
+                            match: 1,
+                        },
+                        {
+                            q: "When is it better not to make a vow?",
+                            a: [
+                                "When you're tired",
+                                "When you are unsure you can fulfill it",
+                                "When you're alone",
+                                "When you are at church",
+                            ],
+                            correct: 1, // B
+                            match: 1,
+                        },
+                        {
+                            q: "What kind of attitude should you have when making a vow?",
+                            a: [
+                                "Careless and emotional",
+                                "Sincere and thoughtful",
+                                "Proud and loud",
+                                "Silent and forgetful",
+                            ],
+                            correct: 1, // B
+                            match: 1,
+                        },
+                        {
+                            q: "Which of the following scriptures teaches that vows must be paid without delay?",
+                            a: [
+                                "Psalm 23:1",
+                                "Genesis 1:1",
+                                "Ecclesiastes 5:4",
+                                "Proverbs 3:5",
+                            ],
+                            correct: 2, // C
+                            match: 2,
+                        },
+                        {
+                            q: "According to Psalm 50:14–15, what should you do after making a vow?",
+                            a: [
+                                "Keep quiet about it",
+                                "Call upon God in trouble",
+                                "Forget it and move on",
+                                "Wait for others to fulfill it",
+                            ],
+                            correct: 1, // B
+                            match: 1,
+                        },
+                    ];
+
+
+
+
+
+
+                    let currentQuestion = 0;
+                    let timeLeft = 50;
+                    let timer;
+                    let score = 0;
+                    let isQuizActive = false;
+                    let questionResults = [];
+
+                    // ... other functions stay the same until endQuiz() ...
+                    function getPerformanceBadge(score) {
+                        // Changed to use score instead of percentage
+                        if (score >= 150) {
+                            return `<div class="badge gold">
+                                    <i class="fas fa-crown"></i>
+                                    <span>Grand Master of Tithing</span>
+                                </div>`;
+                        } else if (score >= 100) {
+                            return `<div class="badge silver">
+                                    <i class="fas fa-star"></i>
+                                    <span>Tithing Expert</span>
+                                </div>`;
+                        } else if (score >= 50) {
+                            return `<div class="badge bronze">
+                                    <i class="fas fa-award"></i>
+                                    <span>Tithing Scholar</span>
+                                </div>`;
+                        } else if (score >= 30) {
+                            return `<div class="badge beginner">
+                                    <i class="fas fa-seedling"></i>
+                                    <span>Tithing Student</span>
+                                </div>`;
+                        }
+                        return `<div class="badge beginner">
+                                <i class="fas fa-child"></i>
+                                <span>Tithing Beginner</span>
+                            </div>`;
+                    }
+
+                    function startSpeedQuiz() {
+                        if (isQuizActive) return;
+                        isQuizActive = true;
+                        score = 0;
+                        timeLeft = 100;
+                        currentQuestion = 0;
+                        questionResults = [];
+                        document.getElementById("speed-score").textContent =
+                            score;
+                        showQuestion();
+                        startTimer();
+                    }
+
+                    function showQuestion() {
+                        if (currentQuestion >= speedQuestions.length) {
+                            endQuiz();
+                            return;
+                        }
+                        const q = speedQuestions[currentQuestion];
+                        document.getElementById(
+                            "question-container"
+                        ).innerHTML = `
+                                <h4>Question ${currentQuestion + 1} of ${
+                            speedQuestions.length
+                        }:</h4>
+                                <p>${q.q}</p>
+                            `;
+                        document
+                            .querySelectorAll(".speed-btn")
+                            .forEach((btn, i) => {
+                                btn.textContent = q.a[i];
+                            });
+                    }
+
+                    function checkAnswer(choice) {
+                        if (!isQuizActive) return;
+                        const correct =
+                            speedQuestions[currentQuestion].correct === choice;
+                        const timebonus = Math.floor(timeLeft / 10);
+                        const pointsEarned = correct ? 10 + timebonus : 0;
+
+                        questionResults.push({
+                            question: currentQuestion + 1,
+                            correct: correct,
+                            points: pointsEarned,
+                            timeBonus: timebonus,
+                            match: speedQuestions[currentQuestion].match,
+                        });
+
+                        if (correct) {
+                            score += pointsEarned;
+                        }
+
+                        const feedback = document.getElementById("feedback");
+                        feedback.textContent = correct
+                            ? `Correct! +${pointsEarned} points`
+                            : "Wrong! Try the next question";
+                        feedback.className = `feedback ${
+                            correct ? "correct" : "wrong"
+                        }`;
+
+                        document.getElementById("speed-score").textContent =
+                            score;
+                        currentQuestion++;
+                        setTimeout(() => {
+                            feedback.textContent = "";
+                            showQuestion();
+                        }, 1000);
+                    }
+
+                    function startTimer() {
+                        timer = setInterval(() => {
+                            timeLeft--;
+                            document.getElementById("timer").textContent =
+                                timeLeft;
+                            if (timeLeft <= 0) endQuiz();
+                        }, 1000);
+                    }
+
+                    function createPerformanceChart() {
+                        const ctx = document.createElement("canvas");
+                        ctx.id = "performanceChart";
+                        ctx.style.marginTop = "20px";
+                        // Set minimum height for mobile
+                        ctx.style.minHeight = "300px"; // Added minimum height
+
+                        const labels = questionResults.map(
+                            (r) => `Q${r.question}`
+                        );
+                        const pointsData = questionResults.map((r) => r.points);
+                        const backgroundColors = questionResults.map(
+                            (r) =>
+                                r.correct
+                                    ? "rgba(75, 192, 192, 0.6)"
+                                    : "rgba(255, 0, 0, 0.6)" // Changed to pure red
+                        );
+                        const borderColors = questionResults.map(
+                            (r) =>
+                                r.correct
+                                    ? "rgba(75, 192, 192, 1)"
+                                    : "rgba(255, 0, 0, 1)" // Changed to pure red
+                        );
+
+                        new Chart(ctx, {
+                            type: "bar",
+                            data: {
+                                labels: labels,
+                                datasets: [
+                                    {
+                                        label: "Points per Question",
+                                        data: pointsData,
+                                        backgroundColor: backgroundColors,
+                                        borderColor: borderColors,
+                                        borderWidth: 1,
+                                    },
+                                ],
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                aspectRatio: 1,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        title: {
+                                            display: true,
+                                            text: "Points",
+                                        },
+                                    },
+                                    x: {
+                                        title: {
+                                            display: true,
+                                            text: "Questions",
+                                        },
+                                    },
+                                },
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: "Performance Breakdown",
+                                    },
+                                    legend: {
+                                        display: false,
+                                    },
+                                },
+                            },
+                        });
+                        return ctx;
+                    }
+
+                    function endQuiz() {
+                        isQuizActive = false;
+                        clearInterval(timer);
+                        const questionsAttempted = currentQuestion;
+                        const correctAnswers = questionResults.filter(
+                            (r) => r.correct
+                        ).length;
+                        const scorePercentage = Math.round(
+                            (correctAnswers / speedQuestions.length) * 100
+                        );
+
+                        const container =
+                            document.getElementById("question-container");
+                        container.innerHTML = `
+                            <h4>Quiz Complete!</h4>
+                            ${getPerformanceBadge(score)}
+                            <p>Questions Attempted: ${questionsAttempted} of ${
+                            speedQuestions.length
+                        }</p>
+                            <p>Final Score: ${score} points</p>
+                            <p>Performance: ${scorePercentage}%</p>
+                            <p>Time Remaining: ${timeLeft}s</p>
+                            <p>${getScoreMessage(score)}</p>
+                            
+                            <div class="share-buttons">
+                                <button onclick="shareToWhatsApp()" class="share-btn whatsapp">
+                                    <i class="fab fa-whatsapp"></i> Share to WhatsApp
+                                </button>
+                                <button onclick="shareToFacebook()" class="share-btn facebook">
+                                    <i class="fab fa-facebook"></i> Share to Facebook
+                                </button>
+                            </div>
+
+                            <div class="performance-chart-container"></div>
+                        `;
+
+                        container
+                            .querySelector(".performance-chart-container")
+                            .appendChild(createPerformanceChart());
+
+                        // Add styles for share buttons
+                        const style = document.createElement("style");
+                        style.textContent = `
+                            .share-buttons {
+                                display: flex;
+                                gap: 10px;
+                                margin: 15px 0;
+                                justify-content: center;
+                            }
+                            .share-btn {
+                                padding: 10px 20px;
+                                border: none;
+                                border-radius: 5px;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                gap: 8px;
+                                color: white;
+                                font-size: 14px;
+                            }
+                            .whatsapp {
+                                background-color: #25D366;
+                            }
+                            .facebook {
+                                background-color: #1877F2;
+                            }
+                        `;
+                        document.head.appendChild(style);
+                    }
+
+                    function shareToWhatsApp() {
+                        const text = `🎯 Bible Quiz Result!\n
+                📊 My Score: ${score} points\n
+                ⭐ Performance: ${Math.round(
+                    (questionResults.filter((r) => r.correct).length /
+                        speedQuestions.length) *
+                        100
+                )}%\n
+                🎮 Try the quiz yourself at: ${window.location.href}`;
+
+                        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+                            text
+                        )}`;
+                        window.open(whatsappUrl, "_blank");
+                    }
+
+                    function shareToFacebook() {
+                        const text = `I scored ${score} points in the Bible Quiz! Can you beat my score?`;
+                        const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                            window.location.href
+                        )}&quote=${encodeURIComponent(text)}`;
+                        window.open(fbUrl, "_blank", "width=600,height=400");
+                    }
+
+                    // ... (keep remaining functions the same) ...
+                    function getScoreMessage(score) {
+                        if (score >= 150) {
+                            return "Outstanding! You have excellent knowledge of tithing principles!";
+                        } else if (score >= 100) {
+                            return "Great work! You understand tithing concepts well!";
+                        } else if (score >= 50) {
+                            return "Good effort! Keep studying to improve your understanding.";
+                        } else if (score >= 30) {
+                            return "Keep learning! Review the lesson materials for better understanding.";
+                        }
+                        return "Don't give up! Review the lesson and try again.";
+                    }
+
+                    function resetSpeedQuiz() {
+                        isQuizActive = false;
+                        clearInterval(timer);
+                        score = 0;
+                        timeLeft = 100;
+                        currentQuestion = 0;
+                        questionResults = [];
+                        document.getElementById("speed-score").textContent =
+                            "0";
+                        document.getElementById("timer").textContent = "100";
+                        document.getElementById("feedback").textContent = "";
+                        document.getElementById(
+                            "question-container"
+                        ).innerHTML = `
+                                <h4 style="color:green">Get Ready!</h4>
+                                <p style="color:green">Answer quickly for bonus points!</p>
+                            `;
+                    }
+
+                    // Initialize quiz on page load
+                    document.addEventListener("DOMContentLoaded", () => {
+                        resetSpeedQuiz();
+                    });
+                </script>
+            </div>
+
+            <link rel="stylesheet" href="prayer.css" />
+
+            <!-- <div id="prayer" class="tab-content">
+                <h2>
+                    Prayer Points – Deliverance from the Influence of the Mixed
+                    Multitude
+                </h2>
+                <div class="prayer-section">
+                    <div class="prayer-points">
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Lord, thank You for opening my eyes to the
+                                dangers of the mixed multitude among Your
+                                people. Give me discernment to recognize every
+                                ungodly influence around me.
+                            </div>
+                        </div>
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Father, have mercy on me wherever I have allowed
+                                the mixed multitude to sway my heart or actions
+                                away from Your will. Cleanse me and restore my
+                                focus on You.
+                            </div>
+                        </div>
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                By the blood of Jesus, I break every tie and
+                                association that draws me away from God’s truth.
+                                Separate me from every source of spiritual
+                                pollution and compromise.
+                            </div>
+                        </div>
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Lord, deliver me from the spirit of rebellion,
+                                murmuring, and worldliness that comes from the
+                                mixed multitude. Fill me with a heart that seeks
+                                only to please You.
+                            </div>
+                        </div>
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Holy Spirit, empower me to stand firm in faith,
+                                even when others around me choose the path of
+                                disobedience. Let my life be a testimony of
+                                steadfastness and purity.
+                            </div>
+                        </div>
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Father, protect Your church from every agent of
+                                confusion, division, and compromise. Expose and
+                                uproot every influence that is not of You.
+                            </div>
+                        </div>
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Lord, help me to be a positive influence in my
+                                congregation, drawing others closer to Christ
+                                and not away from Him.
+                            </div>
+                        </div>
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Almighty God, grant me wisdom to choose my
+                                friends and associations wisely, and courage to
+                                flee from every appearance of evil.
+                            </div>
+                        </div>
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Thank You, Lord, for the assurance that as I
+                                separate myself from the mixed multitude, You
+                                will keep me safe and lead me to my promised
+                                inheritance. In Jesus’ name, Amen.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div id="prayer" class="tab-content">
+                <h2>Prayer Points – Faithfulness in Making and Redeeming Vows 🙏📜</h2>
+                <div class="prayer-section">
+                    <div class="prayer-points">
+                        <!-- Thanksgiving -->
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Father, I thank You for Your mercy and love. Thank You for the privilege to make vows unto You and for the strength to fulfill them. Thank You for the Royal Life Women Convention and for speaking to my heart through Your Word.
+                            </div>
+                        </div>
+
+                        <!-- Illumination -->
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Lord, I bless You for opening my eyes to the weight and seriousness of making vows before You. Help me never to treat sacred commitments lightly again.
+                            </div>
+                        </div>
+
+                        <!-- Forgiveness -->
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Merciful Father, I confess that I have made vows in the past and failed to redeem them. Please forgive me for every broken promise, whether made with my mouth or in my heart.
+                            </div>
+                        </div>
+
+                        <!-- Cleansing -->
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Wash me with the blood of Jesus from every sin of unfulfilled vows. Cleanse my heart of every form of deception, delay, or forgetfulness regarding my commitments to You.
+                            </div>
+                        </div>
+
+                        <!-- Commitment -->
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Lord, I make this solemn commitment during this Royal Life Women Convention: that every vow I make henceforth shall be redeemed without delay. Give me grace, integrity, and courage to fulfill my words.
+                            </div>
+                        </div>
+
+                        <!-- Sincerity -->
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Help me, Lord, never to vow just out of emotion or pressure. Let every promise I make to You come from a place of sincerity, faith, and understanding.
+                            </div>
+                        </div>
+
+                        <!-- Guidance -->
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Holy Spirit, guide me in all I do. Remind me of every vow I’ve made, and strengthen me to take the steps necessary to redeem them faithfully.
+                            </div>
+                        </div>
+
+                        <!-- Consecration -->
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Father, set my heart apart for truth and devotion. May my life reflect the honor and reverence I hold for You through my obedience in fulfilling every word I speak before You.
+                            </div>
+                        </div>
+
+                        <!-- Corporate Intercession -->
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Lord, revive in Your church the sacredness of vows and holy commitments. Let every participant of this convention be drawn into deeper covenant relationship with You.
+                            </div>
+                        </div>
+
+                        <!-- Declaration of Assurance -->
+                        <div class="prayer-item">
+                            <div class="prayer-text">
+                                Thank You, Father, for restoring my integrity before You. I believe that as I honor my vows, You will honor me and fulfill Your promises over my life. In Jesus’ name, Amen.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            
+            <div id="assignment" class="tab-content">
+    <h2>
+        <b>Weekly Assignment – Honoring Your Vows to God</b>
+    </h2>
+
+    <div class="assignment-container">
+        <!-- Vow Redemption Tracker -->
+        <div class="assignment-card">
+            <h3>
+                <b><u>Vow Fulfillment Tracker</u></b>
+            </h3>
+            <p>
+                Track your obedience and faithfulness in fulfilling your vows to God throughout this month. Mark each week as you take deliberate steps to honor your spiritual commitments made during the Royal Life Women Convention:
+            </p>
+            <div class="influence-tracker">
+                <div class="track-item">
+                    <input type="checkbox" id="week1" onchange="updateProgress()" />
+                    <label for="week1">Week 1 – I reviewed and wrote down past vows</label>
+                    <input type="date" class="date-input" onchange="updateChart()" />
+                </div>
+                <div class="track-item">
+                    <input type="checkbox" id="week2" onchange="updateProgress()" />
+                    <label for="week2">Week 2 – I began redeeming one or more unfulfilled vows</label>
+                    <input type="date" class="date-input" onchange="updateChart()" />
+                </div>
+                <div class="track-item">
+                    <input type="checkbox" id="week3" onchange="updateProgress()" />
+                    <label for="week3">Week 3 – I made a new vow and acted on it promptly</label>
+                    <input type="date" class="date-input" onchange="updateChart()" />
+                </div>
+                <div class="track-item">
+                    <input type="checkbox" id="week4" onchange="updateProgress()" />
+                    <label for="week4">Week 4 – I encouraged someone else to fulfill their vow</label>
+                    <input type="date" class="date-input" onchange="updateChart()" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripture Assignment -->
+        <div class="assignment-card">
+            <h3>Scripture Study – The Seriousness of Vows</h3>
+            <p>
+                Study the following Bible passages that reveal God's heart about vows, promises, and faithful obedience:
+            </p>
+            <ul class="study-list">
+                <li>
+                    <input type="checkbox" id="verse1" onchange="updateProgress()" />
+                    <label for="verse1">Ecclesiastes 5:4–6 – Pay what you vow</label>
+                    <button onclick="showBibleVersions('Ecclesiastes 5:4-6')" class="verse-btn">Read</button>
+                </li>
+                <li>
+                    <input type="checkbox" id="verse2" onchange="updateProgress()" />
+                    <label for="verse2">Deuteronomy 23:21–23 – Do not delay to pay</label>
+                    <button onclick="showBibleVersions('Deuteronomy 23:21-23')" class="verse-btn">Read</button>
+                </li>
+                <li>
+                    <input type="checkbox" id="verse3" onchange="updateProgress()" />
+                    <label for="verse3">Numbers 30:1–2 – Binding nature of a vow</label>
+                    <button onclick="showBibleVersions('Numbers 30:1-2')" class="verse-btn">Read</button>
+                </li>
+                <li>
+                    <input type="checkbox" id="verse4" onchange="updateProgress()" />
+                    <label for="verse4">Psalm 50:14 – Pay your vows to the Most High</label>
+                    <button onclick="showBibleVersions('Psalm 50:14')" class="verse-btn">Read</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Reflection Area -->
+        <div class="assignment-card">
+            <h3>Reflection Journal – My Commitments Before God</h3>
+            <p>
+                Reflect: Have I made vows to God in the past that I have not fulfilled? What is preventing me from redeeming them? What steps will I now take to obey God and walk in integrity?
+            </p>
+            <textarea id="reflectionText" rows="5" placeholder="Write your personal reflection here..."></textarea>
+            <button onclick="saveReflection()">💾 Save Reflection</button>
+        </div>
+
+        <!-- Visual Progress Bar -->
+        <div class="assignment-card">
+            <h3>Progress Overview</h3>
+            <div class="progress-bar" style="background: #eee; height: 20px; border-radius: 10px;">
+                <div id="assignmentProgress" style="height: 100%; width: 0%; background: #4a6da7; border-radius: 10px;"></div>
+            </div>
+            <p id="progressText">0% Complete</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+            <!-- Chart.js -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+            <script>
+                // Initialize Chart
+                const ctx = document
+                    .getElementById("tithingChart")
+                    .getContext("2d");
+                const tithingChart = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+                        datasets: [
+                            {
+                                label: "Tithe Given",
+                                data: [0, 0, 0, 0],
+                                backgroundColor: "#4a6da7",
+                                borderColor: "#4a6da7",
+                                borderWidth: 1,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 1,
+                            },
+                        },
+                    },
+                });
+
+                // Update chart when checkboxes are clicked
+                function updateChart() {
+                    const weeks = ["week1", "week2", "week3", "week4"];
+                    const newData = weeks.map((id) =>
+                        document.getElementById(id).checked ? 1 : 0
+                    );
+                    tithingChart.data.datasets[0].data = newData;
+                    tithingChart.update();
+                }
+
+                // Update progress bar
+                function updateProgress() {
+                    const total = 7; // 4 weeks + 3 verses
+                    const checked = document.querySelectorAll(
+                        '#assignment input[type="checkbox"]:checked'
+                    ).length;
+                    const percent = (checked / total) * 100;
+
+                    document.getElementById("assignmentProgress").style.width =
+                        percent + "%";
+                    document.getElementById("progressText").textContent =
+                        Math.round(percent) + "% Complete";
+
+                    updateChart();
+                }
+
+                // Save reflection
+                function saveReflection() {
+                    const reflection =
+                        document.getElementById("reflectionText").value;
+                    localStorage.setItem("tithingReflection", reflection);
+                    alert("Reflection saved!");
+                }
+
+                // Load reflection on page load
+                document.addEventListener("DOMContentLoaded", () => {
+                    const saved = localStorage.getItem("tithingReflection");
+                    if (saved) {
+                        document.getElementById("reflectionText").value = saved;
+                    }
+                });
+            </script>
+
+            <!-- Add this modal for Bible versions -->
+            <div id="verse-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 id="verse-reference"></h2>
+                    <div class="version-tab">
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('KJV')"
+                        >
+                            KJV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('NKJV')"
+                        >
+                            NKJV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('NIV')"
+                        >
+                            NIV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('ESV')"
+                        >
+                            ESV
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('AMP')"
+                        >
+                            AMP
+                        </button>
+                        <button
+                            class="version-btn"
+                            onclick="showVersion('NLT')"
+                        >
+                            NLT
+                        </button>
+                    </div>
+                    <div id="verse-text"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Replace your existing font controls with this -->
+        <div class="font-controls">
+            <button
+                onclick="adjustFontSize(-1)"
+                aria-label="Decrease font size"
+            >
+                <i class="fas fa-minus"></i>
+            </button>
+            <span class="font-size">16px</span>
+            <button onclick="adjustFontSize(1)" aria-label="Increase font size">
+                <i class="fas fa-plus"></i>
+            </button>
+            <select
+                class="font-family-select"
+                onchange="changeFont(this.value)"
+            >
+                <option value="'Segoe UI', sans-serif">Default</option>
+                <option value="Arial, sans-serif">Arial</option>
+                <option value="Georgia, serif">Georgia</option>
+                <option value="'Times New Roman', serif">
+                    Times New Roman
+                </option>
+                <option value="'Comic Sans MS', cursive">Comic Sans</option>
+            </select>
+        </div>
+
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            $(function () {
+                let tab = $("tab");
+                tab.click(function () {
+                    alert;
+                });
+            });
+        </script>
+
+        <script>
+            // Loading Screen
+            window.addEventListener("load", function () {
+                setTimeout(() => {
+                    document.querySelector(".loader-container").style.display =
+                        "none";
+                }, 2000);
+            });
+
+            // // Tab Functionality
+            function openTab(tabName) {
+                const tabContents =
+                    document.getElementsByClassName("tab-content");
+                const tabButtons = document.getElementsByClassName("tab-btn");
+                const spinner = document.getElementById("tab-spinner");
+
+                for (let content of tabContents) {
+                    content.classList.remove("active");
+                    content.style.display = "none";
+                }
+
+                for (let button of tabButtons) {
+                    button.classList.remove("active");
+                }
+
+                document.getElementById(tabName).classList.add("active");
+                event.currentTarget.classList.add("active");
+
+                spinner.style.display = "flex";
+
+                setTimeout(() => {
+                    // Hide spinner
+                    spinner.style.display = "none";
+
+                    // Show selected tab content
+                    const selectedTab = document.getElementById(tabName);
+                    selectedTab.style.display = "block";
+
+                    // Trigger a reflow before adding the active class for animation
+                    void selectedTab.offsetWidth;
+
+                    // Add active class to fade in the content
+                    selectedTab.classList.add("active");
+
+                    // Update progress if needed
+                    updateProgress();
+                }, 800); // Adjust loading time as needed (800ms)
+            }
+
+            // Theme Toggle
+
+            function toggleTheme() {
+                document.body.classList.toggle("dark-mode");
+                const icon = document.querySelector(".theme-toggle i");
+                icon.classList.toggle("fa-moon");
+                icon.classList.toggle("fa-sun");
+            }
+
+            // Add these functions to your existing JavaScript
+
+            function showBibleVersions(reference) {
+                const modal = document.getElementById("verse-modal");
+                const verseRef = document.getElementById("verse-reference");
+                verseRef.textContent = reference;
+                modal.style.display = "block";
+                document.body.classList.add("modal-open");
+                showVersion(preferredVersion);
+            }
+
+            const bibleVerses = {
+                "Deuteronomy 23:21": {
+                    KJV: "<b>21</b> When thou shalt vow a vow unto the Lord thy God, thou shalt not slack to pay it: for the Lord thy God will surely require it of thee; and it would be sin in thee.",
+                    NKJV: "<b>21</b> When you make a vow to the Lord your God, you shall not delay to pay it; for the Lord your God will surely require it of you, and it would be sin to you.",
+                    NIV: "<b>21</b> If you make a vow to the Lord your God, do not be slow to pay it, for the Lord your God will certainly demand it of you and you will be guilty of sin.",
+                    ESV: "<b>21</b> If you make a vow to the Lord your God, you shall not delay fulfilling it, for the Lord your God will surely require it of you, and you will be guilty of sin.",
+                    AMP: "<b>21</b> When you make a vow to the Lord your God, you shall not delay in paying it; for it would be sin in you, and the Lord your God will certainly require it of you.",
+                    NLT: "<b>21</b> When you make a vow to the Lord your God, be prompt in fulfilling whatever you promised him. The Lord your God demands that you promptly fulfill all your vows, or you will be guilty of sin.",
+                },
+                "Ecclesiastes 5:1-6": {
+                    KJV: "<b>1</b> Keep thy foot when thou goest to the house of God, and be more ready to hear, than to give the sacrifice of fools: for they consider not that they do evil. <b>2</b> Be not rash with thy mouth, and let not thine heart be hasty to utter any thing before God: for God is in heaven, and thou upon earth: therefore let thy words be few. <b>3</b> For a dream cometh through the multitude of business; and a fool's voice is known by multitude of words. <b>4</b> When thou vowest a vow unto God, defer not to pay it; for he hath no pleasure in fools: pay that which thou hast vowed. <b>5</b> Better is it that thou shouldest not vow, than that thou shouldest vow and not pay. <b>6</b> Suffer not thy mouth to cause thy flesh to sin; neither say thou before the angel, that it was an error: wherefore should God be angry at thy voice, and destroy the work of thine hands?",
+
+                    NKJV: "<b>1</b> Walk prudently when you go to the house of God; and draw near to hear rather than to give the sacrifice of fools, for they do not know that they do evil. <b>2</b> Do not be rash with your mouth, and let not your heart utter anything hastily before God. For God is in heaven, and you on earth; therefore let your words be few. <b>3</b> For a dream comes through much activity, and a fool’s voice is known by his many words. <b>4</b> When you make a vow to God, do not delay to pay it; for He has no pleasure in fools. Pay what you have vowed— <b>5</b> Better not to vow than to vow and not pay. <b>6</b> Do not let your mouth cause your flesh to sin, nor say before the messenger of God that it was an error. Why should God be angry at your excuse and destroy the work of your hands?",
+
+                    NIV: "<b>1</b> Guard your steps when you go to the house of God. Go near to listen rather than to offer the sacrifice of fools, who do not know that they do wrong. <b>2</b> Do not be quick with your mouth, do not be hasty in your heart to utter anything before God. God is in heaven and you are on earth, so let your words be few. <b>3</b> A dream comes when there are many cares, and many words mark the speech of a fool. <b>4</b> When you make a vow to God, do not delay to fulfill it. He has no pleasure in fools; fulfill your vow. <b>5</b> It is better not to make a vow than to make one and not fulfill it. <b>6</b> Do not let your mouth lead you into sin. And do not protest to the temple messenger, 'My vow was a mistake.' Why should God be angry at what you say and destroy the work of your hands?",
+
+                    ESV: "<b>1</b> Guard your steps when you go to the house of God. To draw near to listen is better than to offer the sacrifice of fools, for they do not know that they are doing evil. <b>2</b> Be not rash with your mouth, nor let your heart be hasty to utter a word before God, for God is in heaven and you are on earth. Therefore let your words be few. <b>3</b> For a dream comes with much business, and a fool’s voice with many words. <b>4</b> When you vow a vow to God, do not delay paying it, for he has no pleasure in fools. Pay what you vow. <b>5</b> It is better that you should not vow than that you should vow and not pay. <b>6</b> Let not your mouth lead you into sin, and do not say before the messenger that it was a mistake. Why should God be angry at your voice and destroy the work of your hands?",
+
+                    AMP: "<b>1</b> Guard your steps and focus on what you are doing as you go to the house of God and draw near to listen rather than to offer the careless or irreverent sacrifice of fools; for they are too ignorant to know they are doing evil. <b>2</b> Do not be hasty with your mouth [speaking careless words or vows] or impulsive in thought to bring up a matter before God. For God is in heaven and you are on earth; therefore, let your words be few. <b>3</b> For the dream comes through much effort, and the voice of the fool through many words. <b>4</b> When you make a vow or pledge to God, do not put off paying it; for God takes no pleasure in fools [who thoughtlessly mock Him]. Pay what you vow. <b>5</b> It is better that you should not vow than that you should vow and not pay. <b>6</b> Do not allow your speech to cause you to sin and do not say before the messenger [of God] that it was a mistake. Why should God be angry because of your voice (words) and destroy the work of your hands?",
+
+                    NLT: "<b>1</b> As you enter the house of God, keep your ears open and your mouth shut. It is evil to make mindless offerings to God. <b>2</b> Don’t make rash promises, and don’t be hasty in bringing matters before God. After all, God is in heaven, and you are here on earth. So let your words be few. <b>3</b> Too much activity gives you restless dreams; too many words make you a fool. <b>4</b> When you make a promise to God, don’t delay in following through, for God takes no pleasure in fools. Keep all the promises you make to him. <b>5</b> It is better to say nothing than to make a promise and not keep it. <b>6</b> Don’t let your mouth make you sin. And don’t defend yourself by telling the Temple messenger that the promise you made was a mistake. That would make God angry, and he might wipe out everything you have achieved.",
+                },
+                "Ecclesiastes 5:1-2": {
+                    KJV: "<b>1</b> Keep thy foot when thou goest to the house of God, and be more ready to hear, than to give the sacrifice of fools: for they consider not that they do evil. <b>2</b> Be not rash with thy mouth, and let not thine heart be hasty to utter any thing before God: for God is in heaven, and thou upon earth: therefore let thy words be few.",
+
+                    NKJV: "<b>1</b> Walk prudently when you go to the house of God; and draw near to hear rather than to give the sacrifice of fools, for they do not know that they do evil. <b>2</b> Do not be rash with your mouth, and let not your heart utter anything hastily before God. For God is in heaven, and you on earth; therefore let your words be few.",
+
+                    NIV: "<b>1</b> Guard your steps when you go to the house of God. Go near to listen rather than to offer the sacrifice of fools, who do not know that they do wrong. <b>2</b> Do not be quick with your mouth, do not be hasty in your heart to utter anything before God. God is in heaven and you are on earth, so let your words be few.",
+
+                    ESV: "<b>1</b> Guard your steps when you go to the house of God. To draw near to listen is better than to offer the sacrifice of fools, for they do not know that they are doing evil. <b>2</b> Be not rash with your mouth, nor let your heart be hasty to utter a word before God, for God is in heaven and you are on earth. Therefore let your words be few.",
+
+                    AMP: "<b>1</b> Guard your steps and focus on what you are doing as you go to the house of God and draw near to listen rather than to offer the careless or irreverent sacrifice of fools; for they are too ignorant to know they are doing evil. <b>2</b> Do not be hasty with your mouth [speaking careless words or vows] or impulsive in thought to bring up a matter before God. For God is in heaven and you are on earth; therefore, let your words be few.",
+
+                    NLT: "<b>1</b> As you enter the house of God, keep your ears open and your mouth shut. It is evil to make mindless offerings to God. <b>2</b> Don’t make rash promises, and don’t be hasty in bringing matters before God. After all, God is in heaven, and you are here on earth. So let your words be few.",
+                },
+                "Ecclesiastes 5:2": {
+                    KJV: "<b>2</b> Be not rash with thy mouth, and let not thine heart be hasty to utter any thing before God: for God is in heaven, and thou upon earth: therefore let thy words be few.",
+
+                    NKJV: "<b>2</b> Do not be rash with your mouth, and let not your heart utter anything hastily before God. For God is in heaven, and you on earth; therefore let your words be few.",
+
+                    NIV: "<b>2</b> Do not be quick with your mouth, do not be hasty in your heart to utter anything before God. God is in heaven and you are on earth, so let your words be few.",
+
+                    ESV: "<b>2</b> Be not rash with your mouth, nor let your heart be hasty to utter a word before God, for God is in heaven and you are on earth. Therefore let your words be few.",
+
+                    AMP: "<b>2</b> Do not be hasty with your mouth [speaking careless words or vows] or impulsive in thought to bring up a matter before God. For God is in heaven and you are on earth; therefore, let your words be few.",
+
+                    NLT: "<b>2</b> Don’t make rash promises, and don’t be hasty in bringing matters before God. After all, God is in heaven, and you are here on earth. So let your words be few.",
+                },
+                "Judges 11:30-31": {
+                    KJV: "<b>30</b> And Jephthah vowed a vow unto the Lord, and said, If thou shalt without fail deliver the children of Ammon into mine hands, <b>31</b> Then it shall be, that whatsoever cometh forth of the doors of my house to meet me, when I return in peace from the children of Ammon, shall surely be the Lord's, and I will offer it up for a burnt offering.",
+                    
+                    NKJV: "<b>30</b> And Jephthah made a vow to the Lord, and said, 'If You will indeed deliver the people of Ammon into my hands, <b>31</b> then it will be that whatever comes out of the doors of my house to meet me, when I return in peace from the people of Ammon, shall surely be the Lord’s, and I will offer it up as a burnt offering.'",
+                    
+                    NIV: "<b>30</b> And Jephthah made a vow to the Lord: 'If you give the Ammonites into my hands, <b>31</b> whatever comes out of the door of my house to meet me when I return in triumph from the Ammonites will be the Lord’s, and I will sacrifice it as a burnt offering.'",
+                    
+                    ESV: "<b>30</b> And Jephthah made a vow to the Lord and said, 'If you will give the Ammonites into my hand, <b>31</b> then whatever comes out from the doors of my house to meet me when I return in peace from the Ammonites shall be the Lord’s, and I will offer it up for a burnt offering.'",
+                    
+                    AMP: "<b>30</b> Jephthah made a vow to the Lord and said, 'If You will indeed give the Ammonites into my hand, <b>31</b> then whatever comes out of the doors of my house to meet me when I return in peace from the Ammonites, it shall be the Lord’s, and I will offer it up as a burnt offering.'",
+                    
+                    NLT: "<b>30</b> And Jephthah made a vow to the Lord. He said, 'If you give me victory over the Ammonites, <b>31</b> I will give to the Lord whatever comes out of my house to meet me when I return in triumph. I will sacrifice it as a burnt offering.'"
+                },
+
+                "Psalm 26:1": {
+                    KJV: "<b>1</b> Judge me, O Lord; for I have walked in mine integrity: I have trusted also in the Lord; therefore I shall not slide.",
+                    
+                    NKJV: "<b>1</b> Vindicate me, O Lord, for I have walked in my integrity. I have also trusted in the Lord; I shall not slip.",
+                    
+                    NIV: "<b>1</b> Vindicate me, Lord, for I have led a blameless life; I have trusted in the Lord and have not faltered.",
+                    
+                    ESV: "<b>1</b> Vindicate me, O Lord, for I have walked in my integrity, and I have trusted in the Lord without wavering.",
+                    
+                    AMP: "<b>1</b> Vindicate me, O Lord, for I have walked in my integrity. I have [relied on and] trusted confidently in the Lord without wavering and I shall not slip.",
+                    
+                    NLT: "<b>1</b> Declare me innocent, O Lord, for I have acted with integrity; I have trusted in the Lord without wavering."
+                    
+                },
+                "Judges 11:32-33": {
+                    KJV: "<b>32</b> So Jephthah passed over unto the children of Ammon to fight against them; and the Lord delivered them into his hands. <b>33</b> And he smote them from Aroer, even till thou come to Minnith, even twenty cities, and unto the plain of the vineyards, with a very great slaughter. Thus the children of Ammon were subdued before the children of Israel.",
+                    
+                    NKJV: "<b>32</b> So Jephthah advanced toward the people of Ammon to fight against them, and the Lord delivered them into his hands. <b>33</b> And he defeated them from Aroer as far as Minnith—twenty cities—and to Abel Keramim, with a very great slaughter. Thus the people of Ammon were subdued before the children of Israel.",
+                    
+                    NIV: "<b>32</b> Then Jephthah went over to fight the Ammonites, and the Lord gave them into his hands. <b>33</b> He devastated twenty towns from Aroer to the vicinity of Minnith, as far as Abel Keramim. Thus Israel subdued Ammon.",
+                    
+                    ESV: "<b>32</b> So Jephthah crossed over to the Ammonites to fight against them, and the Lord gave them into his hand. <b>33</b> And he struck them from Aroer to the neighborhood of Minnith, twenty cities, and as far as Abel-keramim, with a great blow. So the Ammonites were subdued before the people of Israel.",
+                    
+                    AMP: "<b>32</b> So Jephthah crossed over to the Ammonites to fight with them; and the Lord gave them into his hand. <b>33</b> And from Aroer to the entrance of Minnith—twenty cities—and as far as Abel-keramim, he struck them with a very great slaughter. So the Ammonites were subdued and humbled before the Israelites.",
+                    
+                    NLT: "<b>32</b> So Jephthah led his army against the Ammonites, and the Lord gave him victory. <b>33</b> He crushed the Ammonites, devastating about twenty towns from Aroer to an area near Minnith and as far away as Abel-keramim. In this way Israel defeated the Ammonites."
+                }, 
+
+                "Numbers 30:2": {
+                    KJV: "<b>2</b> If a man vow a vow unto the Lord, or swear an oath to bind his soul with a bond; he shall not break his word, he shall do according to all that proceedeth out of his mouth.",
+                    
+                    NKJV: "<b>2</b> If a man makes a vow to the Lord, or swears an oath to bind himself by some agreement, he shall not break his word; he shall do according to all that proceeds out of his mouth.",
+                    
+                    NIV: "<b>2</b> When a man makes a vow to the Lord or takes an oath to obligate himself by a pledge, he must not break his word but must do everything he said.",
+                    
+                    ESV: "<b>2</b> If a man vows a vow to the Lord, or swears an oath to bind himself by a pledge, he shall not break his word. He shall do according to all that proceeds out of his mouth.",
+                    
+                    AMP: "<b>2</b> If a man makes a vow to the Lord, or swears an oath to bind himself with a pledge, he shall not break [violate, profane] his word; he shall do according to all that proceeds out of his mouth.",
+                    
+                    NLT: "<b>2</b> A man who makes a vow to the Lord or makes a pledge under oath must never break it. He must do exactly what he said he would do."
+                },
+
+                "Ecclesiastes 5:6": {
+                    KJV: "<b>6</b> Suffer not thy mouth to cause thy flesh to sin; neither say thou before the angel, that it was an error: wherefore should God be angry at thy voice, and destroy the work of thine hands?",
+                    
+                    NKJV: "<b>6</b> Do not let your mouth cause your flesh to sin, nor say before the messenger of God that it was an error. Why should God be angry at your excuse and destroy the work of your hands?",
+                    
+                    NIV: "<b>6</b> Do not let your mouth lead you into sin. And do not protest to the temple messenger, 'My vow was a mistake.' Why should God be angry at what you say and destroy the work of your hands?",
+                    
+                    ESV: "<b>6</b> Let not your mouth lead you into sin, and do not say before the messenger that it was a mistake. Why should God be angry at your voice and destroy the work of your hands?",
+                    
+                    NLT: "<b>6</b> Don’t let your mouth make you sin. And don’t defend yourself by telling the Temple messenger that the promise you made was a mistake. That would make God angry, and he might wipe out everything you have achieved.",
+                    
+                    AMP: "<b>6</b> Do not allow your speech to cause you to sin and do not say before the messenger (the priest) [of God] that it was a mistake. Why should God be angry because of your voice (your words) and destroy the work of your hands?"
+                },
+                "Psalm 50:7": {
+                    KJV: "<b>7</b> Hear, O my people, and I will speak; O Israel, and I will testify against thee: I am God, even thy God.",
+                    
+                    NKJV: "<b>7</b> “Hear, O My people, and I will speak, O Israel, and I will testify against you; I am God, your God!",
+                    
+                    NIV: "<b>7</b> “Listen, my people, and I will speak; I will testify against you, Israel: I am God, your God.",
+                    
+                    ESV: "<b>7</b> “Hear, O my people, and I will speak; O Israel, I will testify against you. I am God, your God.",
+                    
+                    NLT: "<b>7</b> “O my people, listen as I speak. Here are my charges against you, O Israel: I am God, your God!",
+                    
+                    AMP: "<b>7</b> “Hear, O My people, and I will speak, O Israel, I will testify against you; I am God, your God."
+                },
+
+                "Psalm 50:14–15": {
+                    "KJV": "<b>14</b> Offer unto God thanksgiving; and pay thy vows unto the most High: <b>15</b> And call upon me in the day of trouble: I will deliver thee, and thou shalt glorify me.",
+                    
+                    "NKJV": "<b>14</b> Offer to God thanksgiving, and pay your vows to the Most High. <b>15</b> Call upon Me in the day of trouble; I will deliver you, and you shall glorify Me.",
+                    
+                    "NIV": "<b>14</b> ‘Sacrifice thank offerings to God, fulfill your vows to the Most High, <b>15</b> and call on me in the day of trouble; I will deliver you, and you will honor me.’",
+                    
+                    "ESV": "<b>14</b> Offer to God a sacrifice of thanksgiving, and perform your vows to the Most High, <b>15</b> and call upon me in the day of trouble; I will deliver you, and you shall glorify me.",
+                    
+                    "NLT": "<b>14</b> Make thankfulness your sacrifice to God, and keep the vows you made to the Most High. <b>15</b> Then call on me when you are in trouble, and I will rescue you, and you will give me glory.",
+                    
+                    "AMP": "<b>14</b> Offer to God the sacrifice of thanksgiving and pay your vows to the Most High; <b>15</b> Call on Me in the day of trouble; I will rescue you, and you shall honor and glorify Me."
+                },
+                "Genesis 28:20-22": {
+                    "KJV": "<b>20</b> And Jacob vowed a vow, saying, If God will be with me, and will keep me in this way that I go, and will give me bread to eat, and raiment to put on, <b>21</b> So that I come again to my father's house in peace; then shall the Lord be my God: <b>22</b> And this stone, which I have set for a pillar, shall be God's house: and of all that thou shalt give me I will surely give the tenth unto thee.",
+                    
+                    "NKJV": "<b>20</b> Then Jacob made a vow, saying, “If God will be with me, and keep me in this way that I am going, and give me bread to eat and clothing to put on, <b>21</b> so that I come back to my father’s house in peace, then the Lord shall be my God. <b>22</b> And this stone which I have set as a pillar shall be God’s house, and of all that You give me I will surely give a tenth to You.”",
+
+                    "NIV": "<b>20</b> Then Jacob made a vow, saying, “If God will be with me and will watch over me on this journey I am taking and will give me food to eat and clothes to wear <b>21</b> so that I return safely to my father’s household, then the Lord will be my God <b>22</b> and this stone that I have set up as a pillar will be God’s house, and of all that you give me I will give you a tenth.”",
+
+                    "ESV": "<b>20</b> Then Jacob made a vow, saying, “If God will be with me and will keep me in this way that I go, and will give me bread to eat and clothing to wear, <b>21</b> so that I come again to my father’s house in peace, then the Lord shall be my God, <b>22</b> and this stone, which I have set up for a pillar, shall be God’s house. And of all that you give me I will give a full tenth to you.”",
+
+                    "AMP": "<b>20</b> Then Jacob made a vow (promise), saying, “If God will be with me and will keep me on this journey that I take, and will give me food to eat and clothing to wear, <b>21</b> and if He grants that I return to my father’s house in safety, then the Lord will be my God. <b>22</b> This stone which I have set up as a pillar (memorial) will be God’s house (a sacred place to me), and of everything that You give me I will give the tenth to You [as an offering to signify my gratitude and dependence on You].”",
+
+                    "NLT": "<b>20</b> Then Jacob made this vow: “If God will indeed be with me and protect me on this journey, and if he will provide me with food and clothing, <b>21</b> and if I return safely to my father’s home, then the Lord will certainly be my God. <b>22</b> And this memorial pillar I have set up will become a place for worshiping God, and I will present to God a tenth of everything he gives me.”"
+                },
+                "Ecclesiastes 5:4-6": {
+                    "KJV": "<b>4</b> When thou vowest a vow unto God, defer not to pay it; for he hath no pleasure in fools: pay that which thou hast vowed. <b>5</b> Better is it that thou shouldest not vow, than that thou shouldest vow and not pay. <b>6</b> Suffer not thy mouth to cause thy flesh to sin; neither say thou before the angel, that it was an error: wherefore should God be angry at thy voice, and destroy the work of thine hands?",
+
+                    "NKJV": "<b>4</b> When you make a vow to God, do not delay to pay it; for He has no pleasure in fools. Pay what you have vowed— <b>5</b> Better not to vow than to vow and not pay. <b>6</b> Do not let your mouth cause your flesh to sin, nor say before the messenger of God that it was an error. Why should God be angry at your excuse and destroy the work of your hands?",
+
+                    "NIV": "<b>4</b> When you make a vow to God, do not delay to fulfill it. He has no pleasure in fools; fulfill your vow. <b>5</b> It is better not to make a vow than to make one and not fulfill it. <b>6</b> Do not let your mouth lead you into sin. And do not protest to the temple messenger, 'My vow was a mistake.' Why should God be angry at what you say and destroy the work of your hands?",
+
+                    "ESV": "<b>4</b> When you vow a vow to God, do not delay paying it, for he has no pleasure in fools. Pay what you vow. <b>5</b> It is better that you should not vow than that you should vow and not pay. <b>6</b> Let not your mouth lead you into sin, and do not say before the messenger that it was a mistake. Why should God be angry at your voice and destroy the work of your hands?",
+
+                    "AMP": "<b>4</b> When you make a vow or pledge to God, do not put off paying it; for God takes no pleasure in fools [who thoughtlessly mock Him]. Pay what you vow. <b>5</b> It is better that you should not vow than that you should vow and not pay. <b>6</b> Do not allow your speech to cause you to sin and do not say before the messenger [of God] that it was a mistake. Why should God be angry because of your voice (words) and destroy the work of your hands?",
+
+                    "NLT": "<b>4</b> When you make a promise to God, don’t delay in following through, for God takes no pleasure in fools. Keep all the promises you make to him. <b>5</b> It is better to say nothing than to make a promise and not keep it. <b>6</b> Don’t let your mouth make you sin. And don’t defend yourself by telling the Temple messenger that the promise you made was a mistake. That would make God angry, and he might wipe out everything you have achieved."
+                },
+
+                "Deuteronomy 23:21-23": {
+                    "KJV": "<b>21</b> When thou shalt vow a vow unto the Lord thy God, thou shalt not slack to pay it: for the Lord thy God will surely require it of thee; and it would be sin in thee. <b>22</b> But if thou shalt forbear to vow, it shall be no sin in thee. <b>23</b> That which is gone out of thy lips thou shalt keep and perform; even a freewill offering, according as thou hast vowed unto the Lord thy God, which thou hast promised with thy mouth.",
+
+                    "NKJV": "<b>21</b> When you make a vow to the Lord your God, you shall not delay to pay it; for the Lord your God will surely require it of you, and it would be sin to you. <b>22</b> But if you abstain from vowing, it shall not be sin to you. <b>23</b> That which has gone from your lips you shall keep and perform, for you voluntarily vowed to the Lord your God what you have promised with your mouth.",
+
+                    "NIV": "<b>21</b> If you make a vow to the Lord your God, do not be slow to pay it, for the Lord your God will certainly demand it of you and you will be guilty of sin. <b>22</b> But if you refrain from making a vow, you will not be guilty. <b>23</b> Whatever your lips utter you must be sure to do, because you made your vow freely to the Lord your God with your own mouth.",
+
+                    "ESV": "<b>21</b> If you make a vow to the Lord your God, you shall not delay fulfilling it, for the Lord your God will surely require it of you, and you will be guilty of sin. <b>22</b> But if you refrain from vowing, you will not be guilty of sin. <b>23</b> You shall be careful to do what has passed your lips, for you have voluntarily vowed to the Lord your God what you have promised with your mouth.",
+
+                    "AMP": "<b>21</b> When you make a vow to the Lord your God, you shall not delay in paying it, for the Lord your God will most certainly require it of you, and a delay would be sin in you. <b>22</b> If you refrain from making a vow, that would not be sin in you. <b>23</b> You shall be careful to perform what has passed your lips, for you have voluntarily vowed to the Lord your God what you have promised with your mouth.",
+
+                    "NLT": "<b>21</b> When you make a vow to the Lord your God, be prompt in fulfilling whatever you promised him. The Lord your God demands that you promptly fulfill all your vows, or you will be guilty of sin. <b>22</b> However, it is not a sin to refrain from making a vow. <b>23</b> But once you have voluntarily made a vow, be careful to fulfill your promise to the Lord your God."
+                },
+
+                "Numbers 30:2": {
+                    "KJV": "<b>2</b> If a man vow a vow unto the Lord, or swear an oath to bind his soul with a bond; he shall not break his word, he shall do according to all that proceedeth out of his mouth.",
+
+                    "NKJV": "<b>2</b> If a man makes a vow to the Lord, or swears an oath to bind himself by some agreement, he shall not break his word; he shall do according to all that proceeds out of his mouth.",
+
+                    "NIV": "<b>2</b> When a man makes a vow to the Lord or takes an oath to obligate himself by a pledge, he must not break his word but must do everything he said.",
+
+                    "ESV": "<b>2</b> If a man vows a vow to the Lord, or swears an oath to bind himself by a pledge, he shall not break his word. He shall do according to all that proceeds out of his mouth.",
+
+                    "AMP": "<b>2</b> If a man makes a vow to the Lord or swears an oath to bind himself with a pledge, he shall not break (violate, profane) his word; he shall do according to all that has proceeded out of his mouth.",
+
+                    "NLT": "<b>2</b> A man who makes a vow to the Lord or makes a pledge under oath must never break it. He must do exactly what he said he would do."
+                },
+
+                "Ecclesiastes 5:6": {
+                    "KJV": "<b>6</b> Suffer not thy mouth to cause thy flesh to sin; neither say thou before the angel, that it was an error: wherefore should God be angry at thy voice, and destroy the work of thine hands?",
+
+                    "NKJV": "<b>6</b> Do not let your mouth cause your flesh to sin, nor say before the messenger of God that it was an error. Why should God be angry at your excuse and destroy the work of your hands?",
+
+                    "NIV": "<b>6</b> Do not let your mouth lead you into sin. And do not protest to the temple messenger, 'My vow was a mistake.' Why should God be angry at what you say and destroy the work of your hands?",
+
+                    "ESV": "<b>6</b> Let not your mouth lead you into sin, and do not say before the messenger that it was a mistake. Why should God be angry at your voice and destroy the work of your hands?",
+
+                    "AMP": "<b>6</b> Do not allow your speech to cause you to sin and do not say before the messenger [of God] that it was a mistake. Why should God be angry because of your voice (words) and destroy the work of your hands?",
+
+                    "NLT": "<b>6</b> Don’t let your mouth make you sin. And don’t defend yourself by telling the Temple messenger that the promise you made was a mistake. That would make God angry, and he might wipe out everything you have achieved."
+                },
+
+                "Psalm 50:7": {
+                    "KJV": "<b>7</b> Hear, O my people, and I will speak; O Israel, and I will testify against thee: I am God, even thy God.",
+
+                    "NKJV": "<b>7</b> “Hear, O My people, and I will speak, O Israel, and I will testify against you; I am God, your God!",
+
+                    "NIV": "<b>7</b> “Listen, my people, and I will speak; I will testify against you, Israel: I am God, your God.",
+
+                    "ESV": "<b>7</b> “Hear, O my people, and I will speak; O Israel, I will testify against you. I am God, your God.",
+
+                    "AMP": "<b>7</b> “Hear, O My people, and I will speak, O Israel, I will testify against you; I am God, your God.",
+
+                    "NLT": "<b>7</b> “O my people, listen as I speak. Here are my charges against you, O Israel: I am God, your God!"
+                },
+
+                "Psalm 50:14-15": {
+                    "KJV": "<b>14</b> Offer unto God thanksgiving; and pay thy vows unto the most High: <b>15</b> And call upon me in the day of trouble: I will deliver thee, and thou shalt glorify me.",
+
+                    "NKJV": "<b>14</b> Offer to God thanksgiving, and pay your vows to the Most High. <b>15</b> Call upon Me in the day of trouble; I will deliver you, and you shall glorify Me.",
+
+                    "NIV": "<b>14</b> “Sacrifice thank offerings to God, fulfill your vows to the Most High, <b>15</b> and call on me in the day of trouble; I will deliver you, and you will honor me.”",
+
+                    "ESV": "<b>14</b> Offer to God a sacrifice of thanksgiving, and perform your vows to the Most High, <b>15</b> and call upon me in the day of trouble; I will deliver you, and you shall glorify me.",
+
+                    "AMP": "<b>14</b> Offer to God the sacrifice of thanksgiving and pay your vows to the Most High; <b>15</b> Call on Me in the day of trouble; I will rescue you, and you shall honor and glorify Me.",
+
+                    "NLT": "<b>14</b> Make thankfulness your sacrifice to God, and keep the vows you made to the Most High. <b>15</b> Then call on me when you are in trouble, and I will rescue you, and you will give me glory."
+                },
+                "Genesis 31:13": {
+                    "KJV": "<b>13</b> I am the God of Bethel, where thou anointedst the pillar, and where thou vowedst a vow unto me: now arise, get thee out from this land, and return unto the land of thy kindred.",
+
+                    "NKJV": "<b>13</b> I am the God of Bethel, where you anointed the pillar and where you made a vow to Me. Now arise, get out of this land, and return to the land of your family.",
+
+                    "NIV": "<b>13</b> I am the God of Bethel, where you anointed a pillar and where you made a vow to me. Now leave this land at once and go back to your native land.”",
+
+                    "ESV": "<b>13</b> I am the God of Bethel, where you anointed a pillar and made a vow to me. Now arise, go out from this land and return to the land of your kindred.”",
+
+                    "AMP": "<b>13</b> I am the God of Bethel, where you anointed the pillar and where you made a vow to Me. Now arise, leave this land, and return to the land of your birth.”",
+
+                    "NLT": "<b>13</b> I am the God who appeared to you at Bethel, the place where you anointed the pillar of stone and made your vow to me. Now get ready and leave this country and return to the land of your birth.”"
+                },
+
+
+                "Numbers 30:1-2": {
+    "KJV": "<b>1</b> And Moses spake unto the heads of the tribes concerning the children of Israel, saying, This is the thing which the Lord hath commanded. <b>2</b> If a man vow a vow unto the Lord, or swear an oath to bind his soul with a bond; he shall not break his word, he shall do according to all that proceedeth out of his mouth.",
+
+    "NKJV": "<b>1</b> Then Moses spoke to the heads of the tribes concerning the children of Israel, saying, “This is the thing which the Lord has commanded: <b>2</b> If a man makes a vow to the Lord, or swears an oath to bind himself by some agreement, he shall not break his word; he shall do according to all that proceeds out of his mouth.",
+
+    "NIV": "<b>1</b> Moses said to the heads of the tribes of Israel: “This is what the Lord commands: <b>2</b> When a man makes a vow to the Lord or takes an oath to obligate himself by a pledge, he must not break his word but must do everything he said.",
+
+    "ESV": "<b>1</b> Moses spoke to the heads of the tribes of the people of Israel, saying, “This is what the Lord has commanded. <b>2</b> If a man vows a vow to the Lord, or swears an oath to bind himself by a pledge, he shall not break his word. He shall do according to all that proceeds out of his mouth.",
+
+    "AMP": "<b>1</b> Then Moses spoke to the heads (leaders) of the tribes of the Israelites, saying, “This is the thing which the Lord has commanded: <b>2</b> If a man makes a vow to the Lord or swears an oath to bind himself with a pledge, he shall not break (violate, profane) his word; he shall do according to all that has proceeded out of his mouth.",
+
+    "NLT": "<b>1</b> Then Moses summoned the leaders of the tribes of Israel and told them, “This is what the Lord has commanded: <b>2</b> A man who makes a vow to the Lord or makes a pledge under oath must never break it. He must do exactly what he said he would do."
+},
+
+"Psalm 50:14": {
+  "KJV": "Offer unto God thanksgiving; and pay thy vows unto the most High:",
+  "NKJV": "Offer to God thanksgiving, and pay your vows to the Most High.",
+  "NIV": "Sacrifice thank offerings to God, fulfill your vows to the Most High,",
+  "ESV": "Offer to God a sacrifice of thanksgiving, and perform your vows to the Most High,",
+  "AMP": "Offer to God the sacrifice of thanksgiving and pay your vows to the Most High;",
+  "NLT": "Make thankfulness your sacrifice to God, and keep the vows you made to the Most High."
+},
+
+
+
+
+
+
+
+
+
+
+            };
+            
+
+            // Replace the existing showVersion function
+
+            function showVersion(version) {
+                const reference =
+                    document.getElementById("verse-reference").textContent;
+                const verseText = document.getElementById("verse-text");
+
+                // Show loader
+                verseText.innerHTML =
+                    '<div class="verse-loader"><i class="fas fa-spinner fa-2x"></i></div>';
+
+                // Simulate loading time and show verse
+                setTimeout(() => {
+                    if (bibleVerses[reference]) {
+                        verseText.innerHTML = `<p class="verse-text">${bibleVerses[reference][version]}</p>`;
+                        // Add show class after a brief delay to trigger fade-in
+                        setTimeout(() => {
+                            document
+                                .querySelector(".verse-text")
+                                .classList.add("show");
+                        }, 100);
+                    } else {
+                        verseText.innerHTML =
+                            "<p>Verse not found in database.</p>";
+                    }
+
+                    // Update active button
+                    document.querySelectorAll(".version-btn").forEach((btn) => {
+                        btn.classList.remove("active");
+                        if (btn.textContent === version)
+                            btn.classList.add("active");
+                    });
+                }, 100); // Half second loading time
+            }
+
+            // Close modal when clicking the X or outside
+            document.querySelector(".close").onclick = function () {
+                document.getElementById("verse-modal").style.display = "none";
+                document.body.classList.remove("modal-open");
+            };
+
+            window.onclick = function (event) {
+                const modal = document.getElementById("verse-modal");
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    document.body.classList.remove("modal-open");
+                }
+            };
+
+            function checkQuiz() {
+                const answers = {
+                    q1: "a", // Malachi 3:10
+                    q2: "b", // Time of Melchizedek and Abraham
+                    q3: "a", // No, it predates the Law of Moses
+                    q4: "c", // Christ
+                    q5: "a", // Hebrews 7:6-8
+                    q6: "a", // To support Melchizedek's priesthood
+                };
+
+                let score = 0;
+                let total = Object.keys(answers).length;
+                let resultsHTML = "<h3>📊 Quiz Results</h3><ul>";
+
+                for (let key in answers) {
+                    const selected = document.querySelector(
+                        `input[name="${key}"]:checked`
+                    );
+                    if (selected) {
+                        if (selected.value === answers[key]) {
+                            score++;
+                            resultsHTML += `<li>Question ${key.slice(
+                                1
+                            )}: ✅ Correct</li>`;
+                        } else {
+                            resultsHTML += `<li>Question ${key.slice(
+                                1
+                            )}: ❌ Incorrect</li>`;
+                        }
+                    } else {
+                        resultsHTML += `<li>Question ${key.slice(
+                            1
+                        )}: ⚠️ Not answered</li>`;
+                    }
+                }
+
+                resultsHTML += `</ul>`;
+
+                // Calculate percentage and add appropriate styling
+                const percentage = Math.round((score / total) * 100);
+                let scoreClass = "";
+                let message = "";
+
+                if (percentage >= 80) {
+                    scoreClass = "score-excellent";
+                    message =
+                        "🎉 Excellent work! You have a strong understanding of biblical tithing.";
+                } else if (percentage >= 60) {
+                    scoreClass = "score-good";
+                    message =
+                        "👍 Good job! You have a solid foundation, but consider reviewing some concepts.";
+                } else {
+                    scoreClass = "score-needs-improvement";
+                    message =
+                        "📚 Keep studying! Review the lesson materials to strengthen your understanding.";
+                }
+
+                resultsHTML += `<div class="score-summary ${scoreClass}">
+                            <strong>Your Score: ${score} out of ${total} (${percentage}%)</strong>
+                            <br><br>${message}
+                        </div>`;
+
+                const resultsDiv = document.getElementById("quiz-results");
+                resultsDiv.innerHTML = resultsHTML;
+                resultsDiv.classList.add("show");
+                resultsDiv.scrollIntoView({ behavior: "smooth" });
+            }
+
+            let progress = 0;
+            const totalSections = 5; // Number of tabs
+
+            function updateProgress(increment = true) {
+                if (increment) {
+                    progress = Math.min(100, progress + 100 / totalSections);
+                }
+                const progressBar = document.querySelector(".progress");
+                const progressText = document.querySelector(".progress-text");
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `${Math.round(progress)}% Complete`;
+
+                if (progress >= 100) {
+                    showToast(
+                        "Congratulations! You've completed the lesson! 🎉"
+                    );
+                }
+            }
+
+            function showToast(message) {
+                const toast = document.createElement("div");
+                toast.className = "toast";
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                // Trigger reflow
+                toast.offsetHeight;
+
+                // Show toast
+                toast.style.opacity = "1";
+
+                // Hide after 3 seconds
+                setTimeout(() => {
+                    toast.style.opacity = "0";
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+
+            // Add interaction tracking to tab switching
+            const originalOpenTab = openTab;
+            openTab = function (tabName) {
+                originalOpenTab(tabName);
+                updateProgress();
+
+                // Add animation to questions
+                if (tabName === "quiz") {
+                    document.querySelectorAll(".question").forEach((q, i) => {
+                        setTimeout(() => q.classList.add("show"), i * 200);
+                    });
+                }
+            };
+
+            // Save progress to localStorage
+            function saveProgress() {
+                localStorage.setItem("lessonProgress", progress);
+                showToast("Progress saved! 💾");
+            }
+
+            // Load saved progress
+            window.addEventListener("load", () => {
+                const savedProgress = localStorage.getItem("lessonProgress");
+                if (savedProgress) {
+                    progress = parseFloat(savedProgress);
+                    updateProgress(false);
+                }
+            });
+
+            // Share functionality
+            function shareLesson() {
+                if (navigator.share) {
+                    navigator
+                        .share({
+                            title: "Sunday School Lesson",
+                            text: "Check out this lesson on Real Christian Clothing!",
+                            url: window.location.href,
+                        })
+                        .then(() => showToast("Shared successfully! 🙌"))
+                        .catch(() => showToast("Sharing failed"));
+                } else {
+                    showToast("Sharing not supported on this device");
+                }
+            }
+
+            // Scroll to top
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                });
+            }
+
+            // Add to your existing JavaScript
+
+            let preferredVersion =
+                localStorage.getItem("preferredVersion") || "KJV";
+
+            function changeDefaultVersion(version) {
+                preferredVersion = version;
+                localStorage.setItem("preferredVersion", version);
+                showVersion(version);
+                showToast(`Default Bible version changed to ${version}`);
+            }
+
+            // Update the showBibleVersions function
+
+            // Load preferred version on startup
+            window.addEventListener("load", () => {
+                const savedVersion = localStorage.getItem("preferredVersion");
+                if (savedVersion) {
+                    preferredVersion = savedVersion;
+                    document.querySelectorAll(".version-btn").forEach((btn) => {
+                        btn.classList.remove("active");
+                        if (btn.textContent === preferredVersion)
+                            btn.classList.add("active");
+                    });
+                }
+            });
+
+            // Add this to your existing <script> section
+            let currentFontSize =
+                parseInt(localStorage.getItem("preferredFontSize")) || 16;
+
+            function adjustFontSize(delta) {
+                // Adjust font size with limits
+                currentFontSize = Math.min(
+                    Math.max(currentFontSize + delta, 12),
+                    24
+                );
+
+                // Update CSS variable
+                document.documentElement.style.setProperty(
+                    "--font-size",
+                    `${currentFontSize}px`
+                );
+
+                // Update display
+                document.querySelector(
+                    ".font-size"
+                ).textContent = `${currentFontSize}px`;
+
+                // Save to localStorage
+                localStorage.setItem("preferredFontSize", currentFontSize);
+            }
+
+            // Initialize font size on page load
+            window.addEventListener("load", () => {
+                // Set initial font size
+                document.documentElement.style.setProperty(
+                    "--font-size",
+                    `${currentFontSize}px`
+                );
+                document.querySelector(
+                    ".font-size"
+                ).textContent = `${currentFontSize}px`;
+
+                // Add scalable-text class to all text elements
+                document
+                    .querySelectorAll(
+                        "p, h1, h2, h3, h4, h5, h6, li, blockquote, label, button, input, textarea, .tab-btn, .verse-text, .options label"
+                    )
+                    .forEach((el) => el.classList.add("scalable-text"));
+            });
+
+            function changeFont(fontFamily) {
+                document.body.style.fontFamily = fontFamily;
+                // Save preference
+                localStorage.setItem("preferredFont", fontFamily);
+            }
+
+            // Load saved preferences
+            window.addEventListener("load", () => {
+                const savedFontSize = localStorage.getItem("preferredFontSize");
+                if (savedFontSize) {
+                    currentFontSize = parseInt(savedFontSize);
+                    adjustFontSize(0);
+                }
+
+                const savedFont = localStorage.getItem("preferredFont");
+                if (savedFont) {
+                    document.body.style.fontFamily = savedFont;
+                    document.querySelector(".font-family-select").value =
+                        savedFont;
+                }
+            });
+
+            // Add CSS Variable for scaling
+            document.documentElement.style.setProperty(
+                "--content-scale",
+                "100%"
+            );
+
+            // Update content elements to use the scale
+            document
+                .querySelectorAll(
+                    ".tab-content, .memory-verse, .reflection-notes"
+                )
+                .forEach((el) => {
+                    el.classList.add("adjustable-content");
+                    el.style.fontSize =
+                        "calc(1rem * var(--content-scale) / 100)";
+                });
+
+            // Add to your existing <script> section
+            document.addEventListener("DOMContentLoaded", () => {
+                // Love Meter functionality
+                const loveSlider = document.querySelector(".love-slider");
+                const ratingValue = document.querySelector(".rating-value");
+                const ratingFeedback =
+                    document.querySelector(".rating-feedback");
+
+                if (loveSlider) {
+                    loveSlider.addEventListener("input", () => {
+                        const value = loveSlider.value;
+                        ratingValue.textContent = `${value}/10`;
+
+                        // Update feedback based on rating
+                        const feedback =
+                            value >= 8
+                                ? "Excellent! Keep showing God's love!"
+                                : value >= 6
+                                ? "Good effort! There's room to grow."
+                                : "Consider ways to show more love tomorrow.";
+                        ratingFeedback.textContent = feedback;
+                    });
+                }
+
+                // Action Items functionality
+                const addActionBtn = document.querySelector(".add-action-btn");
+                if (addActionBtn) {
+                    addActionBtn.addEventListener("click", () => {
+                        const action = prompt("Enter your custom love action:");
+                        if (action) {
+                            const actionItems =
+                                document.querySelector(".action-items");
+                            const newAction = document.createElement("div");
+                            newAction.className = "action-item";
+                            newAction.innerHTML = `
+                                                                                <input type="checkbox" id="action${Date.now()}">
+                                                                                <label for="action${Date.now()}">${action}</label>
+                                                                            `;
+                            actionItems.insertBefore(newAction, addActionBtn);
+                        }
+                    });
+                }
+
+                // Journal Prompts functionality
+                const prompts = [
+                    "How did you demonstrate God's love today?",
+                    "What challenges did you face in showing love?",
+                    "How can you better express God's love tomorrow?",
+                ];
+                let currentPrompt = 0;
+
+                const updatePrompt = () => {
+                    const promptElement = document.querySelector(".prompt p");
+                    const promptCounter =
+                        document.querySelector(".prompt-counter");
+                    if (promptElement) {
+                        promptElement.textContent = prompts[currentPrompt];
+                        promptCounter.textContent = `${currentPrompt + 1}/${
+                            prompts.length
+                        }`;
+                    }
+                };
+
+                const nextPromptBtn = document.querySelector(".next-prompt");
+                const prevPromptBtn = document.querySelector(".prev-prompt");
+
+                if (nextPromptBtn && prevPromptBtn) {
+                    nextPromptBtn.addEventListener("click", () => {
+                        if (currentPrompt < prompts.length - 1) {
+                            currentPrompt++;
+                            updatePrompt();
+                            prevPromptBtn.disabled = false;
+                            if (currentPrompt === prompts.length - 1) {
+                                nextPromptBtn.disabled = true;
+                            }
+                        }
+                    });
+
+                    prevPromptBtn.addEventListener("click", () => {
+                        if (currentPrompt > 0) {
+                            currentPrompt--;
+                            updatePrompt();
+                            nextPromptBtn.disabled = false;
+                            if (currentPrompt === 0) {
+                                prevPromptBtn.disabled = true;
+                            }
+                        }
+                    });
+                }
+
+                // Commitment functionality
+                const saveCommitmentBtn =
+                    document.querySelector(".save-commitment");
+                const commitmentInput =
+                    document.querySelector(".commitment-input");
+                const commitmentList =
+                    document.querySelector(".commitment-list");
+
+                if (saveCommitmentBtn && commitmentInput && commitmentList) {
+                    // Load saved commitments
+                    const savedCommitments = JSON.parse(
+                        localStorage.getItem("commitments") || "[]"
+                    );
+                    savedCommitments.forEach((commitment) => {
+                        const li = document.createElement("li");
+                        li.textContent = commitment;
+                        commitmentList.appendChild(li);
+                    });
+
+                    saveCommitmentBtn.addEventListener("click", () => {
+                        const commitment = commitmentInput.value.trim();
+                        if (commitment) {
+                            const li = document.createElement("li");
+                            li.textContent = commitment;
+                            commitmentList.appendChild(li);
+
+                            // Save to localStorage
+                            const commitments = JSON.parse(
+                                localStorage.getItem("commitments") || "[]"
+                            );
+                            commitments.push(commitment);
+                            localStorage.setItem(
+                                "commitments",
+                                JSON.stringify(commitments)
+                            );
+
+                            commitmentInput.value = "";
+                            showToast("Commitment saved! 🙏");
+                        }
+                    });
+                }
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const trigger = document.getElementById("fruitTrigger");
+                const audio = document.getElementById("fruitSound");
+
+                let hasPlayed = sessionStorage.getItem("fruitSoundPlayed");
+
+                trigger.addEventListener("click", function () {
+                    // Animate
+                    trigger.classList.add("bounce");
+                    setTimeout(() => trigger.classList.remove("bounce"), 300);
+
+                    // Play sound only once per session
+                    if (!hasPlayed && audio) {
+                        audio.currentTime = 0;
+                        audio.play();
+                        sessionStorage.setItem("fruitSoundPlayed", "true");
+                        hasPlayed = true;
+                    }
+                });
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
