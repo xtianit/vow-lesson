@@ -1947,27 +1947,27 @@
 
 
                 "Numbers 30:1-2": {
-    "KJV": "<b>1</b> And Moses spake unto the heads of the tribes concerning the children of Israel, saying, This is the thing which the Lord hath commanded. <b>2</b> If a man vow a vow unto the Lord, or swear an oath to bind his soul with a bond; he shall not break his word, he shall do according to all that proceedeth out of his mouth.",
+                    "KJV": "<b>1</b> And Moses spake unto the heads of the tribes concerning the children of Israel, saying, This is the thing which the Lord hath commanded. <b>2</b> If a man vow a vow unto the Lord, or swear an oath to bind his soul with a bond; he shall not break his word, he shall do according to all that proceedeth out of his mouth.",
 
-    "NKJV": "<b>1</b> Then Moses spoke to the heads of the tribes concerning the children of Israel, saying, “This is the thing which the Lord has commanded: <b>2</b> If a man makes a vow to the Lord, or swears an oath to bind himself by some agreement, he shall not break his word; he shall do according to all that proceeds out of his mouth.",
+                    "NKJV": "<b>1</b> Then Moses spoke to the heads of the tribes concerning the children of Israel, saying, “This is the thing which the Lord has commanded: <b>2</b> If a man makes a vow to the Lord, or swears an oath to bind himself by some agreement, he shall not break his word; he shall do according to all that proceeds out of his mouth.",
 
-    "NIV": "<b>1</b> Moses said to the heads of the tribes of Israel: “This is what the Lord commands: <b>2</b> When a man makes a vow to the Lord or takes an oath to obligate himself by a pledge, he must not break his word but must do everything he said.",
+                    "NIV": "<b>1</b> Moses said to the heads of the tribes of Israel: “This is what the Lord commands: <b>2</b> When a man makes a vow to the Lord or takes an oath to obligate himself by a pledge, he must not break his word but must do everything he said.",
 
-    "ESV": "<b>1</b> Moses spoke to the heads of the tribes of the people of Israel, saying, “This is what the Lord has commanded. <b>2</b> If a man vows a vow to the Lord, or swears an oath to bind himself by a pledge, he shall not break his word. He shall do according to all that proceeds out of his mouth.",
+                    "ESV": "<b>1</b> Moses spoke to the heads of the tribes of the people of Israel, saying, “This is what the Lord has commanded. <b>2</b> If a man vows a vow to the Lord, or swears an oath to bind himself by a pledge, he shall not break his word. He shall do according to all that proceeds out of his mouth.",
 
-    "AMP": "<b>1</b> Then Moses spoke to the heads (leaders) of the tribes of the Israelites, saying, “This is the thing which the Lord has commanded: <b>2</b> If a man makes a vow to the Lord or swears an oath to bind himself with a pledge, he shall not break (violate, profane) his word; he shall do according to all that has proceeded out of his mouth.",
+                    "AMP": "<b>1</b> Then Moses spoke to the heads (leaders) of the tribes of the Israelites, saying, “This is the thing which the Lord has commanded: <b>2</b> If a man makes a vow to the Lord or swears an oath to bind himself with a pledge, he shall not break (violate, profane) his word; he shall do according to all that has proceeded out of his mouth.",
 
-    "NLT": "<b>1</b> Then Moses summoned the leaders of the tribes of Israel and told them, “This is what the Lord has commanded: <b>2</b> A man who makes a vow to the Lord or makes a pledge under oath must never break it. He must do exactly what he said he would do."
-},
+                    "NLT": "<b>1</b> Then Moses summoned the leaders of the tribes of Israel and told them, “This is what the Lord has commanded: <b>2</b> A man who makes a vow to the Lord or makes a pledge under oath must never break it. He must do exactly what he said he would do."
+                },
 
-"Psalm 50:14": {
-  "KJV": "Offer unto God thanksgiving; and pay thy vows unto the most High:",
-  "NKJV": "Offer to God thanksgiving, and pay your vows to the Most High.",
-  "NIV": "Sacrifice thank offerings to God, fulfill your vows to the Most High,",
-  "ESV": "Offer to God a sacrifice of thanksgiving, and perform your vows to the Most High,",
-  "AMP": "Offer to God the sacrifice of thanksgiving and pay your vows to the Most High;",
-  "NLT": "Make thankfulness your sacrifice to God, and keep the vows you made to the Most High."
-},
+                "Psalm 50:14": {
+                    "KJV": "Offer unto God thanksgiving; and pay thy vows unto the most High:",
+                    "NKJV": "Offer to God thanksgiving, and pay your vows to the Most High.",
+                    "NIV": "Sacrifice thank offerings to God, fulfill your vows to the Most High,",
+                    "ESV": "Offer to God a sacrifice of thanksgiving, and perform your vows to the Most High,",
+                    "AMP": "Offer to God the sacrifice of thanksgiving and pay your vows to the Most High;",
+                    "NLT": "Make thankfulness your sacrifice to God, and keep the vows you made to the Most High."
+                },
 
 
 
@@ -1980,10 +1980,7 @@
 
             };
             
-
-            // Replace the existing showVersion function
-
-            function showVersion(version) {
+              function showVersion(version) {
                 const reference =
                     document.getElementById("verse-reference").textContent;
                 const verseText = document.getElementById("verse-text");
@@ -2001,7 +1998,7 @@
                             document
                                 .querySelector(".verse-text")
                                 .classList.add("show");
-                        }, 100);
+                        }, 00);
                     } else {
                         verseText.innerHTML =
                             "<p>Verse not found in database.</p>";
@@ -2013,8 +2010,13 @@
                         if (btn.textContent === version)
                             btn.classList.add("active");
                     });
-                }, 100); // Half second loading time
+                }, 500); // Half second loading time
             }
+
+
+
+
+
 
             // Close modal when clicking the X or outside
             document.querySelector(".close").onclick = function () {
@@ -2029,6 +2031,10 @@
                     document.body.classList.remove("modal-open");
                 }
             };
+
+
+                            // Replace the existing showVersion function
+
 
             function checkQuiz() {
                 const answers = {
